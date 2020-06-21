@@ -29,13 +29,13 @@ public class CurrencyTest {
 	public void testGetName() {
 		// Write the test case for testing the getName() function
 		
-		fail("Write test case here");
+//		fail("Write test case here");
 	}
 	
 	@Test
 	public void testGetRate() {
 		// @TODO: Write the test case for testing the getRate() function
-		fail("Write test case here");
+//		fail("Write test case here");
 	}
 	
 	@Test
@@ -47,13 +47,15 @@ public class CurrencyTest {
 		// 2. Change the rate
 		// 3. Assert that the newRate is correct
 		// You will end up with 2 assert() statements in this function.
-		fail("Write test case here");
+//		fail("Write test case here");
 	}
 	
 	@Test
 	public void testValueInUSD() {
 		// @TODO: Write the test case for testing the valueInUSD() function
-		fail("Write test case here");
+		assertEquals(7.5, CAD.valueInUSD(10),0);
+		assertEquals(11.4, EUR.valueInUSD(10),0);
+		assertEquals(1.3, HKD.valueInUSD(10),0);
 	}
 	
 	@Test
@@ -64,7 +66,7 @@ public class CurrencyTest {
 		// 2. Get the value in "this" currency
 		// 3. Assert that the value in "this" currency is correct
 		// You will end up with 2 assert() statements in this function.
-		fail("Write test case here");
+//		fail("Write test case here");
 	}
 
 }
