@@ -1,5 +1,8 @@
 package bankingApp;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 public class Money implements Comparable {
 	private double amount;
 	private Currency currency;
@@ -43,6 +46,7 @@ public class Money implements Comparable {
 	 */
 	public String toString() {
 		// @TODO: Fill in the code for this
+		System.out.println(this.amount + "------------->");
 		return String.valueOf(this.amount) + " " + currency.getName();
 	}
 
@@ -118,7 +122,7 @@ public class Money implements Comparable {
 	 */
 	public Money negate() {
 		// @TODO: Fill in the code for this
-		Money negateMoney = new Money(-this.amount, this.currency);	
+		Money negateMoney = new Money(-this.amount, this.currency);
 		return negateMoney;
 	}
 
@@ -135,12 +139,14 @@ public class Money implements Comparable {
 	public int compareTo(Object other) {
 		// @TODO: Fill in the code for this
 		Money otherMoney = (Money) other;
-		if(equals(otherMoney)) {
+		if (equals(otherMoney)) {
 			return 0;
-		}else if (getUniversalValue() > otherMoney.currency.valueInUSD(otherMoney.amount)) {
+		} else if (getUniversalValue() > otherMoney.currency.valueInUSD(otherMoney.amount)) {
 			return 1;
-		}else {
+		} else {
 			return -1;
 		}
-	} 
+	}
+
+	
 }
