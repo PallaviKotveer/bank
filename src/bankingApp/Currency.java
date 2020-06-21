@@ -87,7 +87,7 @@ public class Currency {
 		// Round all final results to 2 decimal points. See round() function.
 		double valueUSD = amount * othercurrency.rate;
 
-		return valueUSD / 0.27;
+		return valueUSD / this.rate;
 	}
 
 	public static double round(double value, int places) {
