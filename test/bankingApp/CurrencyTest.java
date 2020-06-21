@@ -30,12 +30,18 @@ public class CurrencyTest {
 		// Write the test case for testing the getName() function
 		
 //		fail("Write test case here");
+		assertEquals("CAD", CAD.getName());
+		assertEquals("EUR", EUR.getName());
+		assertEquals("HKD", HKD.getName());
 	}
 	
 	@Test
 	public void testGetRate() {
 		// @TODO: Write the test case for testing the getRate() function
 //		fail("Write test case here");
+		assertEquals(0.75, CAD.getRate(),0);
+		assertEquals(1.14, EUR.getRate(),0);
+		assertEquals(0.13, HKD.getRate(),0);
 	}
 	
 	@Test
@@ -67,6 +73,7 @@ public class CurrencyTest {
 		// 3. Assert that the value in "this" currency is correct
 		// You will end up with 2 assert() statements in this function.
 //		fail("Write test case here");
+		
 	}
 
 }
