@@ -80,7 +80,8 @@ public class Money implements Comparable {
 	 */
 	public Money add(Money other) {
 		// @TODO: Fill in the code for this
-
+		Money newMoney = new Money(this.amount + other.amount, this.currency);
+		return newMoney;
 	}
 
 	/**
@@ -94,7 +95,8 @@ public class Money implements Comparable {
 	 */
 	public Money subtract(Money other) {
 		// @TODO: Fill in the code for this
-
+		Money newMoney = new Money(this.amount - other.amount, this.currency);
+		return newMoney;
 	}
 
 	/**
@@ -104,7 +106,7 @@ public class Money implements Comparable {
 	 */
 	public boolean isZero() {
 		// @TODO: Fill in the code for this
-
+		return this.amount == 0.0 ? true : false;
 	}
 
 	/**
@@ -116,7 +118,8 @@ public class Money implements Comparable {
 	 */
 	public Money negate() {
 		// @TODO: Fill in the code for this
-
+		Money negateMoney = new Money(-this.amount, this.currency);	
+		return negateMoney;
 	}
 
 	/**
