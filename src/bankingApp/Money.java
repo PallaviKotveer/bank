@@ -134,6 +134,13 @@ public class Money implements Comparable {
 	 */
 	public int compareTo(Object other) {
 		// @TODO: Fill in the code for this
-
-	}
+		Money otherMoney = (Money) other;
+		if(equals(otherMoney)) {
+			return 0;
+		}else if (getUniversalValue() > otherMoney.currency.valueInUSD(otherMoney.amount)) {
+			return 1;
+		}else {
+			return -1;
+		}
+	} 
 }
