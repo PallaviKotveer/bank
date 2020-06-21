@@ -35,7 +35,7 @@ public class Currency {
 	public double valueInUSD(double amount) {
 		// @TODO: Fill in the code for this
 		// Round your final answer to 2 decimal points. See round() function.
-		return Math.round(amount * this.rate);
+		return round(amount * this.rate, 2);
 	}
 
 	/**
