@@ -84,7 +84,7 @@ public class Money implements Comparable {
 	 */
 	public Money add(Money other) {
 		// @TODO: Fill in the code for this
-		Money newMoney = new Money(this.amount + other.amount, this.currency);
+		Money newMoney = new Money(this.amount + this.currency.valueInThisCurrency(other.amount, other.currency), this.currency);
 		return newMoney;
 	}
 

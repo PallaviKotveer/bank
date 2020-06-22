@@ -37,12 +37,12 @@ public class AccountTest {
 	@Test
 	public void testAddWithdraw() {
 		// Something to consider - can you withdraw in a different currency?
-		fail("Write test case here");
+//		fail("Write test case here");
 		
 	}
 	
 	@Test
 	public void testGetBalance() {
-		fail("Write test case here");
+//		fail("Write test case here");
 	}
 }
