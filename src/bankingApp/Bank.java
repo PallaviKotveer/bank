@@ -35,6 +35,10 @@ public class Bank
 		return currency;
 	}
 	
+	public Hashtable<String, Account> getAccountList() {
+		return this.accountlist;
+	}
+	
 	/**
 	 * Open an account at this bank.
 	 * @param accountid The ID of the account
