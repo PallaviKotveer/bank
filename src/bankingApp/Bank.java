@@ -2,94 +2,92 @@ package bankingApp;
 
 import java.util.Hashtable;
 
-public class Bank {
+public class Bank 
+{
 	private Hashtable<String, Account> accountlist = new Hashtable<String, Account>();
 	private String name;
 	private Currency currency;
-
+	
 	/**
-	 * Create a new bank.
-	 * 
-	 * @param name     Name of this bank
-	 * @param currency Base currency of this bank (Example - Canadian banks will
-	 *                 have base currency of CAD. American banks will have base
-	 *                 currency of USD.)
+	 * Create a new bank.  
+	 * @param name Name of this bank
+	 * @param currency Base currency of this bank (Example - Canadian banks will have base currency of CAD.  American banks will have base currency of USD.)
 	 */
 	public Bank(String bankName, Currency baseCurrencyCode) {
 		this.name = bankName;
 		this.currency = baseCurrencyCode;
 	}
-
+	
 	/**
 	 * Get the name of this bank
-	 * 
 	 * @return Name of this bank
 	 */
 	public String getName() {
 		return name;
 	}
-
+	
 	/**
-	 * Get the Currency of this bank Notice that the Currency is an object
-	 * containing a currency code and exchange rate.
-	 * 
+	 * Get the Currency of this bank
+	 * Notice that the Currency is an object containing a currency code and exchange rate.
 	 * @return The Currency of this bank
 	 */
 	public Currency getCurrency() {
 		return currency;
 	}
-
+	
 	/**
 	 * Open an account at this bank.
-	 * 
 	 * @param accountid The ID of the account
 	 * @throws AccountExistsException If the account already exists
 	 */
 	public void openAccount(String accountid) throws AccountExistsException {
 		if (accountlist.containsKey(accountid)) {
 			throw new AccountExistsException();
-		} else {
-			System.out.println(accountlist.get(accountid));
+		}
+		else {
+			accountlist.get(accountid);
 			accountlist.put(accountid, new Account(accountid, currency));
+			
+			
 		}
 	}
-
+	
 	/**
 	 * Deposit money to an account
-	 * 
 	 * @param accountid Account to deposit to
-	 * @param money     Money to deposit.
+	 * @param money Money to deposit.
 	 * @throws AccountDoesNotExistException If the account does not exist
 	 */
 	public void deposit(String accountid, Money money) throws AccountDoesNotExistException {
-		if (accountlist.containsKey(accountid)) {
+		if (!accountlist.containsKey(accountid)) {
 			throw new AccountDoesNotExistException();
-		} else {
+		}
+		else {
 			Money m = new Money(money.getAmount(), new Currency("USD", money.getCurrency().getRate()));
 			Account account = accountlist.get(accountid);
 			account.deposit(m);
 		}
 	}
-
+	
 	/**
 	 * Withdraw money from an account
-	 * 
 	 * @param accountid Account to withdraw from
-	 * @param money     Money to withdraw
+	 * @param money Money to withdraw
 	 * @throws AccountDoesNotExistException If the account does not exist
 	 */
 	public void withdraw(String accountid, Money money) throws AccountDoesNotExistException {
 		if (!accountlist.containsKey(accountid)) {
 			throw new AccountDoesNotExistException();
-		} else {
+		}
+		else {
 			Account account = accountlist.get(accountid);
-			account.deposit(money);
+			account.withdraw(money);
 		}
 	}
-
+	
 	/**
-	 * Get the balance of an account Balance = total amount of money in the account.
-	 * 
+	 * Get the balance of an account
+	 * Balance = total amount of  money in the account.
 	 * @param accountid Account to get balance from
 	 * @return Balance of the account
 	 * @throws AccountDoesNotExistException If the account does not exist
@@ -97,70 +95,75 @@ public class Bank {
 	public double getBalance(String accountid) throws AccountDoesNotExistException {
 		if (!accountlist.containsKey(accountid)) {
 			throw new AccountDoesNotExistException();
-		} else {
-			return accountlist.get(accountid).getBalance().getAmount();
+		}
+		else {
+			return (accountlist.get(accountid).getBalance().getAmount());
 		}
 	}
 
 	/**
 	 * Transfer money between two accounts
-	 * 
 	 * @param fromaccount Id of account to deduct from in this Bank
-	 * @param tobank      Bank where receiving account resides
-	 * @param toaccount   Id of receiving account
-	 * @param amount      Amount of Money to transfer
+	 * @param tobank Bank where receiving account resides
+	 * @param toaccount Id of receiving account
+	 * @param amount Amount of Money to transfer
 	 * @throws AccountDoesNotExistException If one of the accounts do not exist
 	 */
-	public void transfer(String fromaccount, Bank tobank, String toaccount, Money amount)
-			throws AccountDoesNotExistException {
+	public void transfer(String fromaccount, Bank tobank, String toaccount, Money amount) throws AccountDoesNotExistException {
 		if (!accountlist.containsKey(fromaccount) || !tobank.accountlist.containsKey(toaccount)) {
 			throw new AccountDoesNotExistException();
-		} else {
+		}
+		else {
 			accountlist.get(fromaccount).withdraw(amount);
 			tobank.accountlist.get(toaccount).deposit(amount);
-		}
+		}		
 	}
 
 	/**
 	 * Transfer money between two accounts on the same bank
-	 * 
 	 * @param fromaccount Id of account to deduct from
-	 * @param toaccount   Id of receiving account
-	 * @param amount      Amount of Money to transfer
+	 * @param toaccount Id of receiving account
+	 * @param amount Amount of Money to transfer
 	 * @throws AccountDoesNotExistException If one of the accounts do not exist
 	 */
-	public void transfer(String fromaccount, String toaccount, Money amount) throws AccountDoesNotExistException {
-		transfer(fromaccount, this, fromaccount, amount);
+	public void transfer(String fromaccount, String toaccount, Money amount) throws AccountDoesNotExistException 
+	{
+		if (!accountlist.containsKey(fromaccount) || !accountlist.containsKey(toaccount)) {
+			throw new AccountDoesNotExistException();
+		}
+		else {
+			accountlist.get(fromaccount).withdraw(amount);
+			accountlist.get(toaccount).deposit(amount);
+		}		
+		
 	}
 
 	/**
-	 * Add a timed payment A timed payment = a recurring payment.
-	 * 
+	 * Add a timed payment
+	 * A timed payment = a recurring payment.
 	 * @param accountid Id of account to deduct from in this Bank
-	 * @param payid     Id of timed payment
-	 * @param interval  Number of ticks between payments
-	 * @param next      Number of ticks till first payment
-	 * @param amount    Amount of Money to transfer each payment
-	 * @param tobank    Bank where receiving account resides
+	 * @param payid Id of timed payment
+	 * @param interval Number of ticks between payments
+	 * @param next Number of ticks till first payment
+	 * @param amount Amount of Money to transfer each payment
+	 * @param tobank Bank where receiving account resides
 	 * @param toaccount Id of receiving account
 	 */
-	public void addTimedPayment(String accountid, String payid, Integer interval, Integer next, Money amount,
-			Bank tobank, String toaccount) {
+	public void addTimedPayment(String accountid, String payid, Integer interval, Integer next, Money amount, Bank tobank, String toaccount) {
 		Account account = accountlist.get(accountid);
 		account.addTimedPayment(payid, interval, next, amount, tobank, toaccount);
 	}
-
+	
 	/**
 	 * Remove a timed payment
-	 * 
 	 * @param accountid Id of account to remove timed payment from
-	 * @param id        Id of timed payment
+	 * @param id Id of timed payment
 	 */
 	public void removeTimedPayment(String accountid, String id) {
 		Account account = accountlist.get(accountid);
 		account.removeTimedPayment(id);
 	}
-
+	
 	/**
 	 * A time unit passes in the system
 	 */
@@ -168,5 +171,5 @@ public class Bank {
 		for (Account account : accountlist.values()) {
 			account.tick();
 		}
-	}
+	}	
 }
