@@ -12,7 +12,7 @@ pipeline {
                -Dsonar.projectVersion=1.0 \
                -Dsonar.sources=/var/lib/jenkins/workspace/sample/src/com/bankapp/pkg \
                -Dsonar.language=java \
-               -Dsonar.java.binaries=build/classes
+               -Dsonar.java.binaries=build/classes \
                    }
                }
            }
